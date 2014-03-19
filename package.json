@@ -1,0 +1,43 @@
+{
+  "name": "cylon-cli",
+  "version": "0.1.0",
+  "main": "lib/cylon-cli.js",
+  "description": "CLI tools for Cylon.js",
+  "homepage": "http://cylonjs.com",
+  "bugs": "https://github.com/hybridgroup/cylon-cli/issues",
+  "author": {
+    "name": "Ron Evans, Andrew Stewart, Edgar Silva, Mario 'Kuroir' Ricalde, Gize Bonilla, Adrian Zankich",
+    "email": "cylonjs@hybridgroup.com",
+    "url": "http://hybridgroup.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hybridgroup/cylon-cli"
+  },
+  "licenses": [
+    {
+      "type": "Apache 2.0"
+    }
+  ],
+  "hardware": {
+    "*": false,
+    "./": false,
+    "async": true,
+    "node-namespace": true,
+    "./lib": true,
+    "./lib/cli": false
+  },
+  "bin": {
+    "cylon": "./bin/cylon"
+  },
+  "devDependencies": {
+    "sinon-chai": "~2.4.0",
+    "chai": "~1.7.2",
+    "mocha": "~1.12.1",
+    "sinon": "~1.7.3",
+    "jshint": "~2.4.4"
+  },
+  "dependencies": {
+    "node-namespace": "~1.0.0"
+  }
+}

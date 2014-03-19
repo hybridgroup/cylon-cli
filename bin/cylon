@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+
+"use strict";
+
+// Require the Cylon-CLI module, which will bootstrap the CLI tool and
+// load up subcommands
+require('./../lib/cylon-cli.js');
