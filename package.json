@@ -38,6 +38,5 @@
     "jshint": "~2.4.4"
   },
   "dependencies": {
-    "node-namespace": "~1.0.0"
   }
 }
