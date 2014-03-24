@@ -38,5 +38,6 @@
     "jshint": "~2.4.4"
   },
   "dependencies": {
+    "restler": "^3.2.0"
   }
 }
