@@ -83,6 +83,54 @@ describe("cylon spark", function() {
             expect(rest.file).to.be.calledWith("filename.cpp", null, 1024, null, 'text/plain');
             expect(rest.put).to.be.calledWith(uri, opts);
           });
+
+          describe("after the file is uploaded", function() {
+            context("if there was am upload error", function() {
+              beforeEach(function() {
+                var data = {
+                  error: "authorization_error",
+                  error_description: "There was an authorization error"
+                };
+
+                rest.put.returns({ on: stub().callsArgWith(1, data) })
+              });
+
+              it("logs the error", function() {
+                module.action(args);
+                expect(console.log).to.be.calledWith("Failed! Message from Spark's API:");
+                expect(console.log).to.be.calledWith("There was an authorization error");
+              });
+            });
+
+            context("if there was a compilation error", function() {
+              beforeEach(function() {
+                var data = {
+                  ok: false,
+                  errors: [{ error: "[backtrace from Spark's API]" }]
+                };
+
+                rest.put.returns({ on: stub().callsArgWith(1, data) })
+              });
+
+              it("logs the error and backtrace", function() {
+                module.action(args);
+                expect(console.log).to.be.calledWith("Failed! Backtrace from Spark's API:");
+                expect(console.log).to.be.calledWith([{ error: "[backtrace from Spark's API]" }]);
+              });
+            });
+
+            context("if the file uploaded successfully", function() {
+              beforeEach(function() {
+                rest.put.returns({ on: stub().callsArgWith(1, {}) })
+              });
+
+              it("logs that the firmware uploaded successfully", function() {
+                module.action(args);
+                var message = "Uploaded successfully, your Spark Core should be updating now.";
+                expect(console.log).to.be.calledWith(message);
+              });
+            });
+          });
         });
 
         context("if file stats cannot be obtained", function() {
