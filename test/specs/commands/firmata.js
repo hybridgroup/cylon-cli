@@ -143,7 +143,7 @@ describe("cylon firmata", function() {
       });
 
       context("with custom hexfile", function() {
-        var args = ['upload', '/dev/tty.usbmodem1411', 'customFirmware.cpp.hex'];
+        var args = ['upload', 'tty.usbmodem1411', 'customFirmware.cpp.hex'];
 
         it("uploads the custom hexfile", function() {
           var opts = [
