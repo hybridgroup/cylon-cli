@@ -104,6 +104,14 @@ describe("cylon arduino", function() {
     });
 
     describe("upload", function() {
+      beforeEach(function() {
+        stub(os, 'platform').returns('linux');
+      });
+
+      afterEach(function() {
+        os.platform.restore();
+      });
+
       context("with no firmare or port supplied", function() {
         var args = ['upload'];
 
@@ -135,6 +143,15 @@ describe("cylon arduino", function() {
       describe("with the 'firmata' firmware and a port supplied", function() {
         var args = ['upload', 'firmata', '/dev/tty.usbmodem1411'];
 
+        var opts = [
+          '-patmega328p',
+          '-carduino',
+          '-P/dev/tty.usbmodem1411',
+          '-b115200',
+          '-D',
+          '-Uflash:w:firmata.cpp.hex:i'
+        ];
+
         beforeEach(function() {
           stub(path, 'join').returns("firmata.cpp.hex");
         });
@@ -149,19 +166,36 @@ describe("cylon arduino", function() {
         });
 
         it("uses avrdude to upload the sketch to the arduino", function() {
-          var opts = [
-            '-patmega328p',
-            '-carduino',
-            '-P/dev/tty.usbmodem1411',
-            '-b115200',
-            '-D',
-            '-Uflash:w:firmata.cpp.hex:i'
-          ];
-
           module.action(args);
           expect(process.spawn).to.be.calledWith('avrdude', opts);
         });
 
+        context("when platform is OS X", function() {
+          beforeEach(function() {
+            os.platform.returns('darwin');
+          });
+
+          it("uses avrdude to upload the sketch to the arduino", function() {
+            module.action(args);
+            expect(process.spawn).to.be.calledWith('avrdude', opts);
+          });
+        });
+
+        context("when platform is Windows", function() {
+          beforeEach(function() {
+            os.platform.returns('windows');
+          });
+
+          it("logs that the OS isn't supported", function() {
+            module.action(args);
+            expect(console.log).to.be.calledWith("OS not yet supported.");
+          });
+
+          it("doesn't run any commands", function() {
+            module.action(args);
+            expect(process.spawn).to.not.be.called;
+          });
+        });
       });
 
       describe("with the 'rapiro' firmware and a port supplied", function() {
