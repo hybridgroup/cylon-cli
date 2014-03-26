@@ -1,11 +1,11 @@
 "use strict";
 
-var module = source('commands/firmata'),
+var module = source('commands/arduino'),
     process = source('process'),
     os = require('os'),
     path = require('path');
 
-describe("cylon firmata", function() {
+describe("cylon arduino", function() {
   it("provides example usage", function() {
     expect(module.usage).to.be.a('string');
   });
@@ -104,36 +104,12 @@ describe("cylon firmata", function() {
     });
 
     describe("upload", function() {
-      var args = ['upload', '/dev/tty.usbmodem1411'];
-
-      beforeEach(function() {
-        stub(path, 'join').returns("StandardFirmata.cpp.hex");
-      });
-
-      afterEach(function() {
-        path.join.restore();
-      });
-
-      it("uses avrdude to upload a firmata sketch to the arduino", function() {
-        var opts = [
-          '-patmega328p',
-          '-carduino',
-          '-P/dev/tty.usbmodem1411',
-          '-b115200',
-          '-D',
-          '-Uflash:w:StandardFirmata.cpp.hex:i'
-        ];
-
-        module.action(args);
-        expect(process.spawn).to.be.calledWith('avrdude', opts);
-      });
-
-      context("with no port supplied", function() {
+      context("with no firmare or port supplied", function() {
         var args = ['upload'];
 
-        it("logs that no serial port address was supplied", function() {
+        it("logs that an invalid number of arguments were supplied", function() {
           module.action(args);
-          expect(console.log).to.be.calledWith('No serial port address supplied.');
+          expect(console.log).to.be.calledWith('Invalid number of arguments.');
         });
 
         it('does not attempt to run avrdude', function() {
@@ -142,8 +118,86 @@ describe("cylon firmata", function() {
         });
       });
 
-      context("with custom hexfile", function() {
-        var args = ['upload', 'tty.usbmodem1411', 'customFirmware.cpp.hex'];
+      context("with no port supplied", function() {
+        var args = ['upload', 'firmata'];
+
+        it("logs that an invalid number of arguments were supplied", function() {
+          module.action(args);
+          expect(console.log).to.be.calledWith('Invalid number of arguments.');
+        });
+
+        it('does not attempt to run avrdude', function() {
+          module.action(args);
+          expect(process.spawn).to.not.be.called;
+        });
+      });
+
+      describe("with the 'firmata' firmware and a port supplied", function() {
+        var args = ['upload', 'firmata', '/dev/tty.usbmodem1411'];
+
+        beforeEach(function() {
+          stub(path, 'join').returns("firmata.cpp.hex");
+        });
+
+        afterEach(function() {
+          path.join.restore();
+        });
+
+        it("builds a path to the hex file from the provided firmware", function() {
+          module.action(args);
+          expect(path.join).to.be.calledWithMatch('', 'firmata.cpp.hex');
+        });
+
+        it("uses avrdude to upload the sketch to the arduino", function() {
+          var opts = [
+            '-patmega328p',
+            '-carduino',
+            '-P/dev/tty.usbmodem1411',
+            '-b115200',
+            '-D',
+            '-Uflash:w:firmata.cpp.hex:i'
+          ];
+
+          module.action(args);
+          expect(process.spawn).to.be.calledWith('avrdude', opts);
+        });
+
+      });
+
+      describe("with the 'rapiro' firmware and a port supplied", function() {
+        var args = ['upload', 'rapiro', '/dev/tty.usbmodem1411'];
+
+        beforeEach(function() {
+          stub(path, 'join').returns("rapiro.cpp.hex");
+        });
+
+        afterEach(function() {
+          path.join.restore();
+        });
+
+        it("builds a path to the hex file from the provided firmware", function() {
+          module.action(args);
+          expect(path.join).to.be.calledWithMatch('', 'rapiro.cpp.hex');
+        });
+
+        it("uses avrdude to upload the sketch to the arduino", function() {
+          var opts = [
+            '-patmega328p',
+            '-carduino',
+            '-P/dev/tty.usbmodem1411',
+            '-b115200',
+            '-D',
+            '-Uflash:w:rapiro.cpp.hex:i'
+          ];
+
+          module.action(args);
+          expect(process.spawn).to.be.calledWith('avrdude', opts);
+        });
+
+      });
+
+      context("with custom hexfile and port supplied", function() {
+        var args = ['upload', 'customFirmware.cpp.hex', 'tty.usbmodem1411'];
 
         it("uploads the custom hexfile", function() {
           var opts = [
