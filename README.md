@@ -34,6 +34,8 @@ Thank you!
 
 ## Release History
 
+Version 0.1.1 - Fix issues with `arduino` commands.
+
 Version 0.1.0 - Initial Release
 
 ## License
