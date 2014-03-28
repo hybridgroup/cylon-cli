@@ -2,7 +2,7 @@
   "name": "cylon-cli",
   "version": "0.1.1",
   "main": "lib/cylon-cli.js",
-  "description": "CLI tools for Cylon.js",
+  "description": "CLI toolkit for Cylon.js",
   "homepage": "http://cylonjs.com",
   "bugs": "https://github.com/hybridgroup/cylon-cli/issues",
   "author": {
@@ -15,18 +15,8 @@
     "url": "https://github.com/hybridgroup/cylon-cli"
   },
   "licenses": [
-    {
-      "type": "Apache 2.0"
-    }
+    { "type": "Apache 2.0" }
   ],
-  "hardware": {
-    "*": false,
-    "./": false,
-    "async": true,
-    "node-namespace": true,
-    "./lib": true,
-    "./lib/cli": false
-  },
   "bin": {
     "cylon": "./bin/cylon"
   },
