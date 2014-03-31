@@ -28,7 +28,7 @@
     "jshint": "~2.4.4"
   },
   "dependencies": {
-    "restler": "^3.2.0",
+    "restler": "~3.2.0",
 
     "ejs": "~0.8.5",
     "globule": "~0.2.0"
