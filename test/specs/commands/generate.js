@@ -1,7 +1,7 @@
 "use strict";
 
 var module = source("commands/generate"),
-    process = source('process');
+    Process = source('process');
 
 var path = require('path'),
     fs = require('fs');
@@ -22,10 +22,11 @@ describe("cylon generate", function() {
     beforeEach(function() {
       stub(console, 'log');
 
-      stub(process, 'exec');
+      stub(Process, 'exec');
 
       stub(path, 'join');
 
+      stub(fs, 'existsSync');
       stub(fs, 'renameSync');
       stub(fs, 'readFileSync');
       stub(fs, 'writeFileSync');
@@ -37,8 +38,9 @@ describe("cylon generate", function() {
 
     afterEach(function() {
       console.log.restore();
-      process.exec.restore();
+      Process.exec.restore();
       path.join.restore();
+      fs.existsSync.restore();
       fs.renameSync.restore();
       fs.readFileSync.restore();
       fs.writeFileSync.restore();
@@ -58,7 +60,70 @@ describe("cylon generate", function() {
       });
 
       it("doesn't run any commands", function() {
-        expect(process.exec).to.not.be.called;
+        expect(Process.exec).to.not.be.called;
+      });
+    });
+
+    describe("driver", function() {
+      context("when a name is supplied", function() {
+        var args = ["driver", "test"];
+
+        beforeEach(function() {
+          path.join
+            .onFirstCall().returns('hello')
+            .onSecondCall().returns("support/generate/driver/driver.js")
+            .onThirdCall().returns("lib/test.js");
+
+          fs.existsSync.returns(true);
+          fs.readFileSync.returns("<%= className %>")
+          module.action(args);
+        });
+
+        it("reads the template file", function() {
+          expect(path.join).to.be.calledWithMatch('', 'support/generate/driver/driver.js');
+          expect(fs.readFileSync).to.be.calledWithMatch('support/generate/driver/driver.js');
+        });
+
+        it("compiles the template", function() {
+          expect(ejs.render).to.be.calledWith("<%= className %>");
+        });
+
+        it("writes the compiled template to the new driver file", function() {
+          expect(fs.writeFileSync).to.be.calledWithMatch("lib/test.js", "Test");
+        });
+      });
+
+      context("when no ./lib directory could be found", function() {
+        var args = ["driver", "test"];
+
+        beforeEach(function() {
+          fs.existsSync.withArgs(process.cwd(), "lib").returns(false);
+          module.action(args);
+        });
+
+        it("logs that no ./lib directory was found", function() {
+          expect(console.log).to.be.calledWith("No ./lib directory found. Aborting.");
+        });
+
+        it("doesn't run any commands", function() {
+          expect(ejs.render).to.not.be.called;
+        });
+      })
+
+      context("when no name is supplied", function() {
+        var args = ["driver"];
+
+        beforeEach(function() {
+          module.action(args);
+        });
+
+        it("logs that no name was supplied", function() {
+          expect(console.log).to.be.calledWith("No name supplied.")
+        });
+
+        it("doesn't run any commands", function() {
+          expect(ejs.render).to.not.be.called;
+        });
       });
     });
 
@@ -78,9 +143,9 @@ describe("cylon generate", function() {
           expect(console.log).to.be.calledWith("Creating new module 'cylon-new-hardware'");
         });
 
-        it("copies over the template using process#exec and cp", function() {
+        it("copies over the template using Process#exec and cp", function() {
           expect(path.join).to.be.calledWithMatch('', 'support/generate/module');
-          expect(process.exec).to.be.calledWith("cp -R template_dir ./cylon-new-hardware");
+          expect(Process.exec).to.be.calledWith("cp -R template_dir ./cylon-new-hardware");
         });
 
         it("logs that it's compiling the templates for the new module", function() {
@@ -123,7 +188,7 @@ describe("cylon generate", function() {
         });
 
         it("doesn't run any commands", function() {
-          expect(process.exec).to.not.be.called;
+          expect(Process.exec).to.not.be.called;
         });
       });
     });
