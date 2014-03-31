@@ -79,7 +79,7 @@ describe("cylon generate", function() {
         });
 
         it("copies over the template using process#exec and cp", function() {
-          expect(path.join).to.be.calledWithMatch('', 'support/generate');
+          expect(path.join).to.be.calledWithMatch('', 'support/generate/module');
           expect(process.exec).to.be.calledWith("cp -R template_dir ./cylon-new-hardware");
         });
 
