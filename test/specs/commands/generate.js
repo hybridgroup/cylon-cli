@@ -64,6 +64,62 @@ describe("cylon generate", function() {
       });
     });
 
+    describe("robot", function() {
+      context("when a directory name is supplied", function() {
+        var args = ['robot', 'testing'];
+
+        context("if the directory already exists", function() {
+          beforeEach(function() {
+            fs.existsSync.returns(true);
+            module.action(args);
+          });
+
+          it("logs that the destination path exists", function() {
+            var msg = "Destination path ./testing already exists. Aborting."
+            expect(console.log).to.be.calledWith(msg);
+          });
+
+          it("doesn't run any commands", function() {
+            expect(Process.exec).to.not.be.called;
+          });
+        });
+
+        context("if the directory doesn't exist", function() {
+          beforeEach(function() {
+            fs.existsSync.returns(false);
+            path.join
+              .onFirstCall().returns("./testing")
+              .onSecondCall().returns("support/generate/robot");
+            module.action(args);
+          });
+
+          it("logs that it's creating the robot", function() {
+            expect(console.log).to.be.calledWith("Creating new robot in ./testing");
+          });
+
+          it("copies the template to the specified folder", function() {
+            expect(Process.exec).to.be.calledWith("cp -R support/generate/robot ./testing")
+          });
+        });
+      });
+
+      context("when a name is not supplied", function() {
+        var args = ['robot'];
+
+        beforeEach(function() {
+          module.action(args);
+        });
+
+        it("logs that no name was supplied", function() {
+          expect(console.log).to.be.calledWith("No name supplied.")
+        });
+
+        it("doesn't run any commands", function() {
+          expect(Process.exec).to.not.be.called;
+        });
+      });
+    });
+
     describe("driver", function() {
       context("when a name is supplied", function() {
         var args = ["driver", "test"];
