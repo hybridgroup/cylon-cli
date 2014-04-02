@@ -183,6 +183,70 @@ describe("cylon generate", function() {
       });
     });
 
+    describe("tessel", function() {
+      context("when a name is supplied", function() {
+        var args = ["tessel", "new"];
+        var template = "<%= name %>";
+
+        beforeEach(function() {
+          globule.find.returns(["package.json.tpl"]);
+          fs.readFileSync.returns(template);
+          path.join
+            .onFirstCall().returns("./new")
+            .onSecondCall().returns("template_dir")
+          module.action(args);
+        });
+
+        it("logs that it's creating a new robot", function() {
+          expect(console.log).to.be.calledWith("Creating new Tessel-ready robot in ./new");
+        });
+
+        it("copies over the template using Process#exec and cp", function() {
+          expect(path.join).to.be.calledWithMatch('', 'support/generate/tessel');
+          expect(Process.exec).to.be.calledWith("cp -R template_dir ./new");
+        });
+
+        it("uses globule to find all template files", function() {
+          expect(globule.find).to.be.calledWithMatch("./new/**/*.tpl");
+        });
+
+        describe("with template files", function() {
+          it("renames the file", function() {
+            expect(fs.renameSync).to.be.calledWith("package.json.tpl", "package.json");
+          });
+
+          it("reads the new file", function() {
+            expect(fs.readFileSync).to.be.calledWith("package.json");
+          });
+
+          it("runs EJS on the template to get the compiled file", function() {
+            expect(ejs.render).to.be.calledWith(template);
+          });
+
+          it("writes the compiled template to the new file", function() {
+            var compiled = "new"
+            expect(fs.writeFileSync).to.be.calledWithMatch("package.json", compiled);
+          });
+        });
+      });
+
+      context("when no name is supplied", function() {
+        var args = ["tessel"];
+
+        beforeEach(function() {
+          module.action(args);
+        });
+
+        it("logs that no name was supplied", function() {
+          expect(console.log).to.be.calledWith("No name supplied.")
+        });
+
+        it("doesn't run any commands", function() {
+          expect(Process.exec).to.not.be.called;
+        });
+      });
+    });
+
     describe("module", function() {
       context("when a name is supplied", function() {
         var args = ["module", "new-hardware"];
