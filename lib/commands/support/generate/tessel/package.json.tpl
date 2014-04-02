@@ -22,7 +22,7 @@
   "dependencies": {
     "cylon": "~0.13.0",
     "cylon-gpio": "~0.13.0",
-    "cylon-tessel": "0.0.1",
+    "cylon-tessel": "~0.0.1",
     "cylon-i2c": "~0.10.0"
   }
 }
