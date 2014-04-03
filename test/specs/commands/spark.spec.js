@@ -2,6 +2,7 @@
 
 var rest = require('restler'),
     fs = require('fs'),
+    path = require('path'),
     module = source("commands/spark");
 
 describe("cylon spark", function() {
@@ -18,10 +19,12 @@ describe("cylon spark", function() {
 
     beforeEach(function() {
       stub(console, 'log');
+      stub(path, 'join');
     });
 
     afterEach(function() {
       console.log.restore();
+      path.join.restore();
     });
 
     context("with no arguments", function() {
@@ -68,6 +71,20 @@ describe("cylon spark", function() {
             fs.stat.restore();
             rest.file.restore();
             rest.put.restore();
+          });
+
+          context("if the provided filename is 'default'", function() {
+            var args = ['upload', 'access_token', 'device_id', 'default'];
+
+            beforeEach(function() {
+              path.join.returns("default.cpp")
+            });
+
+            it("uploads the default firmware to the Spark", function() {
+              module.action(args);
+              expect(path.join).to.be.calledWithMatch('', 'default.cpp');
+              expect(rest.file).to.be.calledWithMatch('default.cpp');
+            });
           });
 
           it("makes a PUT request to upload the file", function() {
