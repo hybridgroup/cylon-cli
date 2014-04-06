@@ -34,6 +34,8 @@ Thank you!
 
 ## Release History
 
+Version 0.4.0 - Ability to upload Tinker-compatible sketch as default Spark firmware
+
 Version 0.3.0 - Add Tessel generator and robot generator
 
 Version 0.2.0 - Restructure 'generate' commands and add driver file generation.
