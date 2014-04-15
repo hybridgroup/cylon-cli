@@ -27,16 +27,16 @@ describe("cylon bluetooth", function() {
     context("when no subcommand supplied", function() {
       it("logs that a subcommand wasn't supplied and returns", function() {
         module.action([]);
-        expect(console.log).to.be.calledWith("Invalid/no subcommand supplied.");
-        expect(console.log).to.be.calledTwice;
+        expect(console.log).to.be.calledWith("Invalid/no subcommand supplied.\n");
+        expect(console.log).to.be.calledWith("Usage:");
       });
     });
 
     context("when invalid subcommand supplied", function() {
       it("logs that a invalid subcommand was supplied and returns", function() {
         module.action(['laser']);
-        expect(console.log).to.be.calledWith("Invalid/no subcommand supplied.");
-        expect(console.log).to.be.calledTwice;
+        expect(console.log).to.be.calledWith("Invalid/no subcommand supplied.\n");
+        expect(console.log).to.be.calledWith("Usage:");
       });
     });
 
@@ -52,21 +52,21 @@ describe("cylon bluetooth", function() {
       context("command: 'pair'", function() {
         it("passes args to bluez-simple-agent", function() {
           module.action(['pair', 'arg1', 'arg2']);
-          expect(process.spawn).to.be.calledWith("bluez-simple-agent", ["arg1", "arg2"]);
+          expect(process.spawn).to.be.calledWith("bluez-simple-agent", ["arg2", "arg1"]);
         });
       });
 
       context("command: 'unpair'", function() {
         it("unpairs with bluez-simple-agent", function() {
           module.action(['unpair', 'arg1', 'arg2']);
-          expect(process.spawn).to.be.calledWith("bluez-simple-agent", ["arg1", "arg2", "remove"]);
+          expect(process.spawn).to.be.calledWith("bluez-simple-agent", ["arg2", "arg1", "remove"]);
         });
       });
 
       context("command: 'connect'", function() {
         it("uses rfcomm to connect the device", function() {
           module.action(['connect', 'arg1', 'arg2']);
-          var args = ['rfcomm', 'connect', 'arg1', 'arg2', '1'];
+          var args = ['rfcomm', 'connect', 'arg2', 'arg1', '1'];
           expect(process.spawn).to.be.calledWith("sudo", args);
         });
       });
