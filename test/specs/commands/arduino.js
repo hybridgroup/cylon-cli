@@ -38,8 +38,8 @@ describe("cylon arduino", function() {
     context("with an invalid subcommand", function() {
       it("logs that an invalid subcommand was supplied", function() {
         module.action(['invalid']);
-        expect(console.log).to.be.calledWith("Invalid/no subcommand supplied.\n");
         expect(console.log).to.be.calledWith("Usage:");
+        expect(console.log).to.be.calledWith("Invalid/no subcommand supplied.\n");
       });
     });
 
