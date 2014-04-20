@@ -16,7 +16,7 @@ Install the module with: `npm install -g cylon-cli`
 You install the Cylon CLI separately from the rest of Cylon.js, which means you can use it to program Arduinos with the Firmata firmware also compatible with other JavaScript frameworks such as Johnny-Five. The Cylon CLI provides many useful features on other platforms as well.
 
 ## Documentation
-We're busy adding documentation to our web site at http://cylonjs.com/ please check there as we continue to work on Cylon.js
+We're busy adding documentation to our web site at http://cylonjs.com/documentation/cli please check there as we continue to work on the Cylon CLI
 
 Thank you!
 
