@@ -20,6 +20,8 @@ describe("cylon generate", function() {
 
   describe("#action", function() {
     beforeEach(function() {
+      this.clock = sinon.useFakeTimers();
+
       stub(console, 'log');
 
       stub(Process, 'exec');
@@ -37,6 +39,7 @@ describe("cylon generate", function() {
     });
 
     afterEach(function() {
+      this.clock.restore();
       console.log.restore();
       Process.exec.restore();
       path.join.restore();
@@ -257,6 +260,7 @@ describe("cylon generate", function() {
           fs.readFileSync.returns(template);
           path.join.returns("template_dir")
           module.action(args);
+          this.clock.tick(1500);
         });
 
         it("logs that it's creating a new module", function() {
