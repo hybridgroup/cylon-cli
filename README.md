@@ -36,6 +36,8 @@ Thank you!
 
 ## Release History
 
+Version 0.4.2 - Include crazyflie support udev-rules, fix race condition on generate command.
+
 Version 0.4.1 - Update bluetooth commands and inline help for subcommands.
 
 Version 0.4.0 - Ability to upload Tinker-compatible sketch as default Spark firmware

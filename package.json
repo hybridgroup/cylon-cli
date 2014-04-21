@@ -1,6 +1,6 @@
 {
   "name": "cylon-cli",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "main": "lib/cylon-cli.js",
   "description": "CLI toolkit for Cylon.js",
   "homepage": "http://cylonjs.com",
