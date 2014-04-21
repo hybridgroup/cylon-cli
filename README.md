@@ -36,7 +36,9 @@ Thank you!
 
 ## Release History
 
-Version 0.4.2 - Include crazyflie support udev-rules, fix race condition on generate command.
+Version 0.4.3 - Fix race condition on generate command.
+
+Version 0.4.2 - Include crazyflie support udev-rules.
 
 Version 0.4.1 - Update bluetooth commands and inline help for subcommands.
 
