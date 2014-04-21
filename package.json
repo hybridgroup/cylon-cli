@@ -5,32 +5,31 @@
   "description": "CLI toolkit for Cylon.js",
   "homepage": "http://cylonjs.com",
   "bugs": "https://github.com/hybridgroup/cylon-cli/issues",
-  "author": {
-    "name": "Ron Evans, Andrew Stewart, Edgar Silva, Mario 'Kuroir' Ricalde, Gize Bonilla, Adrian Zankich",
-    "email": "cylonjs@hybridgroup.com",
-    "url": "http://hybridgroup.com"
-  },
+
+  "author": "The Hybrid Group <cylonjs@hybridgroup.com>",
+
   "repository": {
     "type": "git",
     "url": "https://github.com/hybridgroup/cylon-cli"
   },
-  "licenses": [
-    { "type": "Apache 2.0" }
-  ],
+
+  "license": "Apache 2.0",
+
   "bin": {
     "cylon": "./bin/cylon"
   },
+
   "devDependencies": {
     "sinon-chai": "~2.4.0",
-    "chai": "~1.7.2",
-    "mocha": "~1.12.1",
-    "sinon": "~1.9.0",
-    "jshint": "~2.4.4"
+    "chai":       "~1.7.2",
+    "mocha":      "~1.12.1",
+    "sinon":      "~1.9.0",
+    "jshint":     "~2.4.4"
   },
+
   "dependencies": {
     "restler": "~3.2.0",
-
-    "ejs": "~0.8.5",
+    "ejs":     "~0.8.5",
     "globule": "~0.2.0"
   }
 }
