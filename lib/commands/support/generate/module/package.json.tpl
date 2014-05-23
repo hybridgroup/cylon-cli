@@ -16,15 +16,14 @@
   "license": "your license type here",
 
   "devDependencies": {
-    "sinon-chai": "~2.5.0",
-    "chai":       "~1.9.0",
-    "mocha":      "~1.17.1",
-    "sinon":      "~1.8.2",
-    "jshint":     "~2.4.4"
+    "sinon-chai": "2.5.0",
+    "chai":       "1.9.1",
+    "mocha":      "1.18.2",
+    "sinon":      "1.9.1",
+    "jshint":     "2.5.0"
   },
 
   "dependencies": {
-    "node-namespace": "~1.0.0",
-    "cylon":          "~<%= cylonVersion %>"
+    "cylon": "~<%= cylonVersion %>"
   }
 }

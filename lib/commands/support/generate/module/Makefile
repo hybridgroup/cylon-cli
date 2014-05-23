@@ -1,5 +1,5 @@
 BIN := ./node_modules/.bin
-TEST_FILES := test/support/globals.js $(shell find test/specs -type f -name "*.js")
+TEST_FILES := test/support/env.js $(shell find test/specs -type f -name "*.js")
 
 # Our 'phony' make targets (don't involve any file changes)
 .PHONY: test bdd lint
