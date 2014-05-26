@@ -2,16 +2,26 @@
 
 var module = source("<%= adaptorName %>");
 
+var Adaptor = source('adaptor'),
+    Driver = source('driver');
+
 describe("Cylon.<%= adaptorClassName %>", function() {
-  it("should be able to register", function() {
-    expect(module.register).to.be.a('function');
+  describe("#register", function() {
+    it("should be a function", function() {
+      expect(module.register).to.be.a('function');
+    });
   });
 
-  it("should be able to create adaptor", function() {
-    expect(module.adaptor()).to.be.a('object');
+  describe("#driver", function() {
+    it("returns an instance of the Driver", function() {
+      var args = { device: {} };
+      expect(module.driver(args))to.be.instanceOf(Driver);
+    });
   });
 
-  it("should be able to create driver", function() {
-    expect(module.adaptor({ device: {} })).to.be.a('object');
+  describe("#adaptor", function() {
+    it("returns an instance of the Adaptor", function() {
+      expect(module.adaptor()).to.be.instanceOf(Adaptor);
+    });
   });
 });

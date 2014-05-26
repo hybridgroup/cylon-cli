@@ -6,28 +6,16 @@
  * Licensed under the Apache 2.0 license.
 */
 
-"use strict";
+'use strict';
 
-require('./<%= adaptorName %>');
-require('./adaptor');
+var Cylon = require('cylon');
 
-var namespace = require('node-namespace');
+var Driver = module.exports = function Driver() {
+  Driver.__super__.constructor.apply(this, arguments);
+};
 
-namespace("Cylon.Drivers", function() {
-  this.<%= adaptorClassName %> = (function(klass) {
-    subclass(<%= adaptorClassName %>, klass);
+subclass(Driver, Cylon.Driver);
 
-    function <%= adaptorClassName %>() {
-      <%= adaptorClassName %>.__super__.constructor.apply(this, arguments);
-    }
-
-    <%= adaptorClassName %>.prototype.start = function(callback) {
-      return <%= adaptorClassName %>.__super__.start.apply(this, arguments);
-    };
-
-    return <%= adaptorClassName %>;
-
-  })(Cylon.Driver);
-});
-
-module.exports = Cylon.Drivers.<%= adaptorClassName %>;
+Driver.prototype.start = function(callback) {
+  Driver.__super__.start.apply(this, arguments);
+};
