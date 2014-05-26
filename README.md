@@ -36,6 +36,8 @@ Thank you!
 
 ## Release History
 
+Version 0.5.0 - Compatibility with Cylon 0.14.0, remove node-namespace from generated files.
+
 Version 0.4.3 - Fix race condition on generate command.
 
 Version 0.4.2 - Include crazyflie support udev-rules.
