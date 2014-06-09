@@ -15,7 +15,7 @@ var Adaptor = module.exports = function Adaptor(opts) {
   Adaptor.__super__.constructor.apply(this, arguments);
 };
 
-subclass(Adaptor, Cylon.Adaptor);
+Cylon.Utils.subclass(Adaptor, Cylon.Adaptor);
 
 Adaptor.prototype.connect = function(callback) {
   <%= adaptorClassName %>.__super__.connect.apply(this, arguments);

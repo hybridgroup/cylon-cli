@@ -14,7 +14,7 @@ var Driver = module.exports = function Driver() {
   Driver.__super__.constructor.apply(this, arguments);
 };
 
-subclass(Driver, Cylon.Driver);
+Cylon.Utils.subclass(Driver, Cylon.Driver);
 
 Driver.prototype.start = function(callback) {
   Driver.__super__.start.apply(this, arguments);
