@@ -1,8 +1,8 @@
 BIN := ./node_modules/.bin
-TEST_FILES := $(shell find test -type f -name "*.spec.js")
+TEST_FILES := test/support/env.js $(shell find test/specs -type f -name "*.js")
 
 # Our 'phony' make targets (don't involve any file changes)
-.PHONY: run test bdd lint
+.PHONY: run test bdd
 
 # Runs the robot defined in robot.js
 run:
@@ -15,7 +15,3 @@ test:
 # Run Mocha, with more verbose BDD reporter.
 bdd:
 	@$(BIN)/mocha --colors -R spec $(TEST_FILES)
-
-# Run JSHint
-lint:
-	@$(BIN)/jshint .
