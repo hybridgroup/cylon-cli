@@ -12,6 +12,7 @@ var Cylon = require('cylon');
 
 var Driver = module.exports = function Driver() {
   Driver.__super__.constructor.apply(this, arguments);
+  this.commands = [];
 };
 
 Cylon.Utils.subclass(Driver, Cylon.Driver);

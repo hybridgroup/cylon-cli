@@ -11,7 +11,10 @@
 var Cylon = require('cylon');
 
 var Adaptor = module.exports = function Adaptor(opts) {
-  if (opts == null) { opts = {}; }
+  if (opts == null) {
+    opts = {};
+  }
+
   Adaptor.__super__.constructor.apply(this, arguments);
 };
 
