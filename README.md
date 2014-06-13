@@ -36,6 +36,8 @@ Thank you!
 
 ## Release History
 
+Version 0.6.1 - Add peerDependencies to generated modules
+
 Version 0.6.0 - Compatibility with Cylon 0.15.0
 
 Version 0.5.0 - Compatibility with Cylon 0.14.0, remove node-namespace from generated files.

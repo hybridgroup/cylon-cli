@@ -23,6 +23,10 @@
     "jshint":     "2.5.0"
   },
 
+  "peerDependencies": {
+    "cylon": ">=<%= cylonVersion %> < 1"
+  },
+
   "dependencies": {
     "cylon": "~<%= cylonVersion %>"
   }
