@@ -17,12 +17,12 @@
     "url": "your git uri here"
   },
   "licenses": [
-    { "type": "Apache 2.0" }
+    { "type": "your license here" }
   ],
   "dependencies": {
-    "cylon": "~0.13.0",
-    "cylon-gpio": "~0.13.0",
-    "cylon-tessel": "~0.0.1",
-    "cylon-i2c": "~0.10.0"
+    "cylon": "~0.15.1",
+    "cylon-gpio": "~0.15.1",
+    "cylon-tessel": "~0.3.0",
+    "cylon-i2c": "~0.12.1"
   }
 }
