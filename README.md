@@ -36,6 +36,8 @@ Thank you!
 
 ## Release History
 
+Version 0.8.1 - Compatibility with Cylon 0.17.0
+
 Version 0.8.0 - Compatibility with Cylon 0.16.0
 
 Version 0.7.0 - Updates for cylon-tessel 0.3.0
