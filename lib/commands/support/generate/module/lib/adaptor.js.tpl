@@ -20,6 +20,10 @@ var Adaptor = module.exports = function Adaptor(opts) {
 
 Cylon.Utils.subclass(Adaptor, Cylon.Adaptor);
 
+// Include a list of commands that will be make availble to the connection;
+// which means they will be used by the drivers.
+Adaptor.prototype.commands = [];
+
 Adaptor.prototype.connect = function(callback) {
-  <%= adaptorClassName %>.__super__.connect.apply(this, arguments);
+  Adaptor.__super__.connect.apply(this, arguments);
 };
