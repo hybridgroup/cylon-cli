@@ -18,7 +18,7 @@ Cylon.Utils.subclass(Driver, Cylon.Driver);
 
 // Include a list of commands that will be made available to the device instance.
 // and used in the work block of the robot.
-adaptor.prototype.commands = [];
+Driver.prototype.commands = [];
 
 Driver.prototype.start = function(callback) {
   Driver.__super__.start.apply(this, arguments);
