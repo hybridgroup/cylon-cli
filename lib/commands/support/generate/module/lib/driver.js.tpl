@@ -19,7 +19,7 @@ var Driver = module.exports = function Driver() {
   this.commands = {
     // This is how you register a command function for the device;
     // the command should be added to the prototype, see below.
-    hello: this.hello;
+    hello: this.hello
   };
 };
 
