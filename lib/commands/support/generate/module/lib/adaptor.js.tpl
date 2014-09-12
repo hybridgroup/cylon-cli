@@ -25,5 +25,9 @@ Cylon.Utils.subclass(Adaptor, Cylon.Adaptor);
 Adaptor.prototype.commands = [];
 
 Adaptor.prototype.connect = function(callback) {
-  Adaptor.__super__.connect.apply(this, arguments);
+  callback();
+};
+
+Adaptor.prototype.disconnect = function(callback) {
+  callback();
 };
