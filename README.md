@@ -36,6 +36,8 @@ Thank you!
 
 ## Release History
 
+Version 0.9.2 - Escape spacing for `cp` command
+
 Version 0.9.1 - Fix semicolon error causing issues
 
 Version 0.9.0 - Compatibility with Cylon 0.18.0
