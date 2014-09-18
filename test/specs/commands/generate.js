@@ -26,7 +26,7 @@ describe("cylon generate", function() {
 
       stub(Process, 'exec');
 
-      stub(path, 'join');
+      stub(path, 'join').returns("");
 
       stub(fs, 'existsSync');
       stub(fs, 'renameSync');
