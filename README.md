@@ -8,7 +8,7 @@ Want to use Ruby on robots? Check out our sister project Artoo (http://artoo.io)
 
 Want to use the Go programming language to power your robots? Check out our sister project Gobot (http://gobot.io).
 
-[![Build Status](https://secure.travis-ci.org/hybridgroup/cylon-cli.png?branch=master)](http://travis-ci.org/hybridgroup/cylon-cli)
+[![Build Status](https://secure.travis-ci.org/hybridgroup/cylon-cli.png?branch=master)](http://travis-ci.org/hybridgroup/cylon-cli) [![Code Climate](https://codeclimate.com/github/hybridgroup/cylon-cli/badges/gpa.svg)](https://codeclimate.com/github/hybridgroup/cylon-cli) [![Test Coverage](https://codeclimate.com/github/hybridgroup/cylon-cli/badges/coverage.svg)](https://codeclimate.com/github/hybridgroup/cylon-cli)
 
 ## Getting Started
 Install the module with: `npm install -g cylon-cli`
