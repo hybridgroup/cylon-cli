@@ -6,16 +6,16 @@
  * Licensed under the Apache 2.0 license.
 */
 
-'use strict';
+"use strict";
 
 var Cylon = require('cylon');
 
-var Driver = module.exports = function Driver() {
+var Driver = module.exports = function Driver(opts) {
   Driver.__super__.constructor.apply(this, arguments);
 
+  opts = opts || {};
 
-  // Include a list of commands that will be made available to the device instance.
-  // and used in the work block of the robot.
+  // Include a list of commands that will be made available to the API.
   this.commands = {
     // This is how you register a command function for the device;
     // the command should be added to the prototype, see below.

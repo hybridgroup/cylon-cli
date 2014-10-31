@@ -8,8 +8,6 @@
 
 'use strict';
 
-var Cylon = require('cylon');
-
 var Adaptor = require('./adaptor'),
     Driver = require('./driver');
 
