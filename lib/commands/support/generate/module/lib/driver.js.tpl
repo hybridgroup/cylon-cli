@@ -17,7 +17,7 @@ var Driver = module.exports = function Driver(opts) {
 
   // Include a list of commands that will be made available to the API.
   this.commands = {
-    // This is how you register a command function for the device;
+    // This is how you register a command function for the API;
     // the command should be added to the prototype, see below.
     hello: this.hello
   };
