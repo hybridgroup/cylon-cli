@@ -20,9 +20,9 @@
     { "type": "your license here" }
   ],
   "dependencies": {
-    "cylon":      "~0.21.0",
+    "cylon":      "~0.21.1",
     "cylon-gpio": "~0.21.0",
     "cylon-i2c":  "~0.18.0",
-    "cylon-tessel": "~0.8.0"
+    "cylon-tessel": "~0.9.0"
   }
 }
