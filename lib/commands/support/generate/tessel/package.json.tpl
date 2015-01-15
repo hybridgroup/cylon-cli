@@ -20,7 +20,7 @@
     { "type": "your license here" }
   ],
   "dependencies": {
-    "cylon":      "~0.22.1",
+    "cylon":      "hybridgroup/cylon#tessel",
     "cylon-gpio": "~0.22.0",
     "cylon-i2c":  "~0.19.0",
     "cylon-tessel": "~0.10.0"
