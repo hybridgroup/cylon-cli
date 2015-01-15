@@ -36,6 +36,8 @@ Thank you!
 
 ## Release History
 
+Version 0.13.1 - Correct issues with Tessel
+
 Version 0.13.0 - Compatibility with Cylon 0.21.0
 
 Version 0.12.1 - Minor version bumps, Tessel update
