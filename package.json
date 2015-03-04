@@ -1,0 +1,37 @@
+{
+  "name": "cylon-cli",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "description": "Generate new adaptor/driver modules for Cylon.js",
+  "homepage": "http://cylonjs.com",
+  "bugs": "https://github.com/hybridgroup/cylon-cli/issues",
+
+  "author": "The Hybrid Group <cylonjs@hybridgroup.com>",
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hybridgroup/cylon-cli"
+  },
+
+  "license": "Apache 2.0",
+
+  "bin": {
+    "cylon": "./bin/cylon"
+  },
+
+  "devDependencies": {
+    "jshint": "2.6.3"
+  },
+
+  "dependencies": {
+    "mkdirp": "0.5.0"
+  },
+
+  "versions": {
+    "cylon": "0.22.1",
+    "sinon-chai": "2.7.0",
+    "chai": "2.1.0",
+    "mocha": "2.1.0",
+    "sinon": "1.12.2"
+  }
+}

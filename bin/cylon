@@ -1,0 +1,114 @@
+#!/usr/bin/env node
+
+"use strict";
+
+var path = require("path"),
+    fs = require("fs");
+
+var pkg = require("../package.json"),
+    versions = pkg.versions;
+
+var args = process.argv.slice(2);
+
+var log = console.log,
+    error = console.error;
+
+function createModule(name, path) {
+  var pkg = {
+    name: name,
+    version: "0.0.0",
+    private: true,
+    devDependencies: {
+      chai: versions.chai,
+      mocha: versions.mocha,
+      sinon: versions.sinon,
+      "sinon-chai": versions["sinon-chai"]
+    },
+    dependencies: {
+      cylon: versions.cylon,
+    }
+  };
+
+  write(path + "/package.json", JSON.stringify(pkg, null, 2));
+}
+
+function main() {
+  if (include(args, ["-v", "--version"])) {
+    log(pkg.version);
+  }
+
+  if (include(args, ["-h", "--help"])) {
+    log([
+      "",
+      "  Usage: cylon [dir]",
+      "",
+      "  Options:",
+      "",
+      "    -h, --help       output usage information",
+      "    -v, --version    output the version number",
+      ""
+    ].join("\n"));
+  }
+
+  var dest = args.shift() || ".",
+      name = path.basename(path.resolve(dest)),
+      empty = isEmpty(dest);
+
+  if (empty) {
+    createModule(name, dest);
+  } else {
+    confirm("destination not empty, continue? [y/n]", function(ok) {
+      if (ok) {
+        process.stdin.destroy();
+        createModule(name, dest);
+      } else {
+        error("aborting");
+        process.exit(1);
+      }
+    });
+  }
+}
+
+main();
+
+// writes a file to disk
+function write(path, content) {
+  fs.writeFileSync(path, str);
+  console.log("    \x1b[34mcreate\x1b[0m : " + path);
+}
+
+// prompt for user confirmation
+function confirm(prompt, callback) {
+  var rl = require("readline").createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
+  rl.question(prompt, function (input) {
+    rl.close();
+    callback(/^y|yes|ok|true$/i.test(input));
+  });
+}
+
+// checks if a directory is empty
+function isEmpty(dir) {
+  try {
+    var files = fs.readdirSync(dir);
+    return !files || !files.length;
+  } catch (e) {
+    if (e.code !== "ENOENT") {
+      throw e;
+    }
+
+    return true;
+  }
+}
+
+// check if an array includes a value (or values)
+function include(arr, items) {
+  if (Array.isArray(items)) {
+    return items.some(function(x) { return ~arr.indexOf(x); });
+  } else {
+    return !!~arr.indexOf(items);
+  }
+}
