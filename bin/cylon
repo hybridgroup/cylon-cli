@@ -54,10 +54,10 @@ function createModule(name, path) {
       copy("spec/helper.js");
 
       mkdir(specLib, function() {
-        copy("spec/lib/index.spec.js")
-        copy("spec/lib/adaptor.spec.js")
-        copy("spec/lib/driver.spec.js")
-      })
+        copy("spec/lib/index.spec.js");
+        copy("spec/lib/adaptor.spec.js");
+        copy("spec/lib/driver.spec.js");
+      });
     });
   });
 }
@@ -86,7 +86,7 @@ function main() {
   }
 
   if (include(args, ["-f", "--force"])) {
-    args = reject(args, function(a) { return a === "-f" || a === "--force" });
+    args = reject(args, function(a) { return a === "-f" || a === "--force"; });
     force = true;
   }
 
@@ -115,20 +115,21 @@ main();
 // writes a file to disk
 function write(path, content) {
   fs.writeFileSync(path, content);
-  console.log("   \x1b[34mcreate\x1b[0m : " + path);
+  log("   \x1b[34mcreate\x1b[0m : " + path);
 }
 
 function mkdir(path, fn) {
   mkdirp(path, function(err) {
-    if (err) throw err;
-    console.log("   \x1b[34mcreate\x1b[0m : " + path);
-    fn && fn();
-  });
-}
+    if (err) {
+      throw err;
+    }
 
-function loadTemplate(name) {
-  var filename = path.join(__dirname, "..", "template", name);
-  return fs.readFileSync(filename, "utf-8");
+    log("   \x1b[34mcreate\x1b[0m : " + path);
+
+    if (typeof fn === "function") {
+      fn();
+    }
+  });
 }
 
 function copy(template) {
@@ -177,4 +178,4 @@ function reject(array, iterator) {
   return array.filter(function (item) {
     return !iterator.call(null, item);
   });
-};
+}
