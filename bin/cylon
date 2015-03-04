@@ -2,8 +2,12 @@
 
 "use strict";
 
+var dest;
+
 var path = require("path"),
     fs = require("fs");
+
+var mkdirp = require("mkdirp");
 
 var pkg = require("../package.json"),
     versions = pkg.versions;
@@ -29,12 +33,41 @@ function createModule(name, path) {
     }
   };
 
-  write(path + "/package.json", JSON.stringify(pkg, null, 2));
+  mkdir(path, function() {
+    var lib = path + "/lib",
+        spec = path + "/spec";
+
+    copy(".gitignore");
+    copy(".jshintrc");
+    copy("Makefile");
+    write(path + "/package.json", JSON.stringify(pkg, null, 2));
+
+    mkdir(lib, function() {
+      copy("lib/index.js");
+      copy("lib/adaptor.js");
+      copy("lib/driver.js");
+    });
+
+    mkdir(spec, function() {
+      var specLib = spec + "/lib";
+
+      copy("spec/helper.js");
+
+      mkdir(specLib, function() {
+        copy("spec/lib/index.spec.js")
+        copy("spec/lib/adaptor.spec.js")
+        copy("spec/lib/driver.spec.js")
+      })
+    });
+  });
 }
 
 function main() {
+  var force = false;
+
   if (include(args, ["-v", "--version"])) {
     log(pkg.version);
+    return;
   }
 
   if (include(args, ["-h", "--help"])) {
@@ -46,15 +79,23 @@ function main() {
       "",
       "    -h, --help       output usage information",
       "    -v, --version    output the version number",
+      "    -f, --force      force on non-empty directory",
       ""
     ].join("\n"));
+    return;
   }
 
-  var dest = args.shift() || ".",
-      name = path.basename(path.resolve(dest)),
+  if (include(args, ["-f", "--force"])) {
+    args = reject(args, function(a) { return a === "-f" || a === "--force" });
+    force = true;
+  }
+
+  dest = args.shift() || ".";
+
+  var name = path.basename(path.resolve(dest)),
       empty = isEmpty(dest);
 
-  if (empty) {
+  if (empty || force) {
     createModule(name, dest);
   } else {
     confirm("destination not empty, continue? [y/n]", function(ok) {
@@ -73,8 +114,27 @@ main();
 
 // writes a file to disk
 function write(path, content) {
-  fs.writeFileSync(path, str);
-  console.log("    \x1b[34mcreate\x1b[0m : " + path);
+  fs.writeFileSync(path, content);
+  console.log("   \x1b[34mcreate\x1b[0m : " + path);
+}
+
+function mkdir(path, fn) {
+  mkdirp(path, function(err) {
+    if (err) throw err;
+    console.log("   \x1b[34mcreate\x1b[0m : " + path);
+    fn && fn();
+  });
+}
+
+function loadTemplate(name) {
+  var filename = path.join(__dirname, "..", "template", name);
+  return fs.readFileSync(filename, "utf-8");
+}
+
+function copy(template) {
+  var from = path.join(__dirname, "..", "template", template),
+      to = dest + "/" + template;
+  write(to, fs.readFileSync(from, "utf-8"));
 }
 
 // prompt for user confirmation
@@ -112,3 +172,9 @@ function include(arr, items) {
     return !!~arr.indexOf(items);
   }
 }
+
+function reject(array, iterator) {
+  return array.filter(function (item) {
+    return !iterator.call(null, item);
+  });
+};
