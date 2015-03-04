@@ -40,6 +40,7 @@ It will prompt for confirmation if the specified directory isn't empty.
 
 Version | Notes
 ------- | -----
+1.0.0   | Rewrite, restriction of functionality to generating new modules
 0.13.1  | Correct issues with Tessel
 0.13.0  | Compatibility with Cylon 0.21.0
 0.12.1  | Minor version bumps, Tessel update
