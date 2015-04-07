@@ -37,8 +37,8 @@ function createModule(name, path) {
     var lib = path + "/lib",
         spec = path + "/spec";
 
-    copy(".gitignore");
-    copy(".jshintrc");
+    copy("gitignore", ".gitignore");
+    copy("jshintrc", ".jshintrc");
     copy("Makefile");
     write(path + "/package.json", JSON.stringify(pkg, null, 2));
 
@@ -132,9 +132,9 @@ function mkdir(path, fn) {
   });
 }
 
-function copy(template) {
-  var from = path.join(__dirname, "..", "template", template),
-      to = dest + "/" + template;
+function copy(src, end) {
+  var from = path.join(__dirname, "..", "template", src),
+      to = dest + "/" + (end || src);
   write(to, fs.readFileSync(from, "utf-8"));
 }
 
