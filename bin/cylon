@@ -20,8 +20,9 @@ var log = console.log,
 function createModule(name, path) {
   var pkg = {
     name: name,
+    description: "Your package description",
     version: "0.0.0",
-    private: true,
+    main: "lib/index.js",
     devDependencies: {
       chai: versions.chai,
       mocha: versions.mocha,
