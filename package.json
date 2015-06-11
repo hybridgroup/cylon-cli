@@ -13,7 +13,17 @@
     "url": "https://github.com/hybridgroup/cylon-cli"
   },
 
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
+
+  "keywords": [
+    "cylon",
+    "cylonjs",
+    "cylons",
+    "robot",
+    "robots",
+    "robotics",
+    "iot"
+  ],
 
   "bin": {
     "cylon": "./bin/cylon"
