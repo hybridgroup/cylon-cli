@@ -30,7 +30,7 @@
   },
 
   "devDependencies": {
-    "jshint": "2.6.3"
+    "eslint": "0.22.1"
   },
 
   "dependencies": {

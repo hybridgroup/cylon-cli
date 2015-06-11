@@ -1,8 +1,8 @@
-BIN := ./node_modules/.bin/
+BIN := ./node_modules/.bin
 VERSION := $(shell node -e "console.log(require('./package.json').version)")
 
 lint:
-	$(BIN)jshint ./bin/cylon
+	@$(BIN)/eslint ./bin/cylon
 
 release:
 	@git push origin master
