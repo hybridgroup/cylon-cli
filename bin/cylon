@@ -38,8 +38,10 @@ function createModule(name, out) {
         spec = out + "/spec";
 
     copy("gitignore", ".gitignore");
-    copy("jshintrc", ".jshintrc");
+    copy("eslintrc", ".eslintrc");
+
     copy("Makefile");
+
     write(out + "/package.json", JSON.stringify(packagejson, null, 2));
 
     mkdir(lib, function() {
@@ -52,6 +54,7 @@ function createModule(name, out) {
       var specLib = spec + "/lib";
 
       copy("spec/helper.js");
+      copy("spec/eslintrc", "spec/.eslintrc");
 
       mkdir(specLib, function() {
         copy("spec/lib/index.spec.js");

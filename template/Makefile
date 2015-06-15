@@ -17,7 +17,7 @@ cover:
 	@istanbul cover $(BIN)/_mocha $(SPEC) --report lcovonly -- -R spec
 
 lint:
-	@jshint $(LIB) $(SPEC)
+	@eslint $(LIB) $(SPEC)
 
 ci: lint cover
 
