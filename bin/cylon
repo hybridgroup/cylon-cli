@@ -21,7 +21,6 @@ function createModule(name, out) {
     name: name,
     description: "Your package description",
     version: "0.0.0",
-    main: "lib/index.js",
     devDependencies: {
       chai: versions.chai,
       mocha: versions.mocha,
@@ -44,8 +43,9 @@ function createModule(name, out) {
 
     write(out + "/package.json", JSON.stringify(packagejson, null, 2));
 
+    copy("index.js");
+
     mkdir(lib, function() {
-      copy("lib/index.js");
       copy("lib/adaptor.js");
       copy("lib/driver.js");
     });
