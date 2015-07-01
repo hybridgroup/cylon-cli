@@ -1,6 +1,6 @@
 {
   "name": "cylon-cli",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "main": "lib/index.js",
   "description": "Generate new adaptor/driver modules for Cylon.js",
   "homepage": "http://cylonjs.com",

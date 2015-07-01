@@ -2,6 +2,7 @@
 
 Version | Notes
 ------- | -----
+1.2.0   | Update versions to latest available
 1.1.0   | Correct generation of package.json
 1.0.0   | Rewrite, restriction of functionality to generating new modules
 0.13.1  | Correct issues with Tessel
