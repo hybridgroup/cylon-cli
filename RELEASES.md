@@ -2,6 +2,7 @@
 
 Version | Notes
 ------- | -----
+1.2.1   | Update to Cylon.js 1.2.0
 1.2.0   | Update versions to latest available
 1.1.0   | Correct generation of package.json
 1.0.0   | Rewrite, restriction of functionality to generating new modules
@@ -28,4 +29,3 @@ Version | Notes
 0.2.0   | Restructure 'generate' commands and add driver file generation. Also fixes error with specification of `restler` dependency.
 0.1.1   | Fix issues with `arduino` commands.
 0.1.0   | Initial Release
-
